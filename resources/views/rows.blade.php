@@ -20,12 +20,14 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                                {{-- Task: only every second row should have "bg-red-100" --}}
-                                <tr class="bg-red-100">
-                                    <td>{{-- Task: add row number here: 1, 2, etc. --}}</td>
+                            {{-- Task: only every second row should have "bg-red-100" --}}
+                                    <tr class="{{$loop->even ? 'bg-red-100' : ''}}">
+                                    <td>{{-- Task: add row number here: 1, 2, etc. --}}{{$loop->index+1}}</td>
                                     <td>{{ $user->name }}</td>
                                     {{-- Task: only the FIRST row should have email with "font-bold" --}}
-                                    <td class="font-bold">{{ $user->email }}</td>
+                                    @if ($loop->first)
+                                        <td class="font-bold">{{ $user->email }}</td>
+                                    @endif
                                     <td>{{ $user->created_at }}</td>
                                 </tr>
                             @endforeach
